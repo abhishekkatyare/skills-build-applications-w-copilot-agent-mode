@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const API_URL = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`;
 
+
 function Users() {
   const [users, setUsers] = useState([]);
 
@@ -18,13 +19,30 @@ function Users() {
   }, []);
 
   return (
-    <div>
-      <h2>Users</h2>
-      <ul>
-        {users.map((user, i) => (
-          <li key={user.id || i}>{user.username} ({user.email})</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-secondary">Users</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-secondary">
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, i) => (
+                <tr key={user.id || i}>
+                  <td>{i + 1}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

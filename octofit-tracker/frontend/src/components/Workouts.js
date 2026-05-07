@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const API_URL = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`;
 
+
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
 
@@ -18,13 +19,30 @@ function Workouts() {
   }, []);
 
   return (
-    <div>
-      <h2>Workouts</h2>
-      <ul>
-        {workouts.map((workout, i) => (
-          <li key={workout.id || i}>{workout.name} ({workout.difficulty})</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-warning">Workouts</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-warning">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Difficulty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {workouts.map((workout, i) => (
+                <tr key={workout.id || i}>
+                  <td>{i + 1}</td>
+                  <td>{workout.name}</td>
+                  <td>{workout.difficulty}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
